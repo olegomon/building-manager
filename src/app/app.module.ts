@@ -5,10 +5,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import {BuildingComponent} from './building/building.component';
+import { NicknameEditorComponent } from './nickname-editor/nickname-editor.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BuildingComponent,
+    NicknameEditorComponent
   ],
   imports: [
     BrowserModule,

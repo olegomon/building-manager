@@ -7,6 +7,6 @@ import {faBuilding} from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Buildings';
+  appTitle = 'Buildings';
   appIcon = faBuilding;
 }
