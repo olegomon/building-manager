@@ -1,5 +1,10 @@
-@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
+/**
+    fix some bootstrap issue
+    when error messages are within the DOM the original selector using the :last-child does not apply for
+    top right and bottom right border radius
+ */
 .input-group {
   > .input-group-append:not(:last-of-type) {
     > .btn {
