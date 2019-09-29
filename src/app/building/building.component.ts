@@ -3,8 +3,8 @@ import {AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {AppToast} from '../app-toasts/app-toast';
 import {AppToastService} from '../app-toasts/app-toast.service';
-import {NicknameService} from '../nickname/nickname.service';
-import {nicknameFormatValidator} from '../nickname/nickname.validator';
+import {NicknameService} from './nickname/nickname.service';
+import {nicknameFormatValidator} from './nickname/nickname.validator';
 
 @Component({
   selector: 'app-building',

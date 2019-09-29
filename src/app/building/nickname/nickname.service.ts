@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {delay, tap} from 'rxjs/operators';
-import {Logger} from '../logger.service';
+import {Logger} from '../../logger.service';
 import {INicknameService} from './nickname.service.interface';
 
 /**
