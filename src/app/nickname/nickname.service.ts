@@ -17,6 +17,18 @@ export class NicknameService implements INicknameService {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  saveNicknames(nicknames: string[]) {
+    return of(nicknames).pipe(
+      delay(this.getRandomInt(250))
+    );
+  }
+
+  // deleteNickname(nickname: string) {
+  //   return of(nicknames).pipe(
+  //     delay(this.getRandomInt(250))
+  //   );
+  // }
+
   isValidNickname(name: string): Observable<boolean> {
     return of(!this.regex.test(name)).pipe(
       delay(this.getRandomInt(250))

@@ -69,13 +69,6 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
     });
   }
 
-  // addNickname() {
-  //   this.nicknameInputList.push(this.formBuilder.control('', {
-  //     validators: this.syncValidators,
-  //     asyncValidators: this.asyncValidators
-  //   }));
-  // }
-
   onSave() {
     const nicknames = this.nicknames.value;
     this.save.emit(nicknames);

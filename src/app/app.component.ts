@@ -36,8 +36,9 @@ export class AppComponent {
   }
 
   onSave(nicknames: string[]) {
-    this.nicknames = nicknames;
-    console.log('save nicknames', nicknames);
+    // this.nicknames = nicknames;
+    // console.log('save nicknames', nicknames);
+    this.nicknameService.saveNicknames(nicknames);
   }
 
   onAdd(nickname) {
