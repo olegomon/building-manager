@@ -1,16 +1,15 @@
-import {TestBed, async} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
+import {AppModule} from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
+        RouterTestingModule,
+        AppModule
+      ]
     }).compileComponents();
   }));
 
@@ -20,16 +19,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'building-manager'`, () => {
+  it(`should have as title 'Buildings'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('building-manager');
+    const app: AppComponent = fixture.debugElement.componentInstance;
+    expect(app.appTitle).toEqual('Buildings');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('building-manager app is running!');
+    expect(compiled.querySelector('.navbar-brand span').textContent).toContain('Buildings');
   });
 });

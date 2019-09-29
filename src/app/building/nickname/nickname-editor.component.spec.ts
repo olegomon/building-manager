@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {BuildingModule} from '../building.module';
 
 import { NicknameEditorComponent } from './nickname-editor.component';
 
@@ -8,7 +9,9 @@ describe('NicknameEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NicknameEditorComponent ]
+      imports: [
+        BuildingModule
+      ]
     })
     .compileComponents();
   }));

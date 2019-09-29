@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { NicknameService } from './nickname.service';
+import {NicknameService} from './nickname.service';
 
 describe('NicknameService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
@@ -9,4 +9,5 @@ describe('NicknameService', () => {
     const service: NicknameService = TestBed.get(NicknameService);
     expect(service).toBeTruthy();
   });
+
 });
