@@ -16,7 +16,7 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   isCollapsed = true;
 
   @Input()
-  nicknames: string[] = [];
+  values: string[] = [];
 
   @Input()
   syncValidators: ValidatorFn | ValidatorFn[] | null = null;
@@ -36,15 +36,15 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  get nicknameInputs() {
-    return this.form.get('nicknames') as FormArray;
+  get inputList() {
+    return this.form.get('inputs') as FormArray;
   }
 
   ngOnInit() {
     // if (this.nicknames.length === 0) {
     //   this.isCollapsed = false;
     // } else {
-      this.form = this.createForm(this.nicknames);
+      this.form = this.createForm(this.values);
     // }
   }
 
@@ -61,12 +61,12 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
       asyncValidators: this.asyncValidators
     }));
     return this.formBuilder.group({
-      nicknames: this.formBuilder.array(nicknames)
+      inputs: this.formBuilder.array(nicknames)
     });
   }
 
   onSave() {
-    const nicknames = this.nicknameInputs.value;
+    const nicknames = this.inputList.value;
     this.save.emit(nicknames);
     // if (this.form.valid) {
     //   const nicknames = this.form.value;
@@ -94,7 +94,7 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   }
 
   isEmpty() {
-    return this.nicknames && this.nicknames.length === 0;
+    return this.inputList && this.inputList.length === 0;
   }
 
   onToggle() {

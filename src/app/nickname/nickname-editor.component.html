@@ -27,8 +27,8 @@
 
     <div class="card-body" [class.bg-light]="!isCollapsed">
       <form [formGroup]="form" (submit)="onSave()">
-        <div formArrayName="nicknames">
-          <div class="form-group" *ngFor="let control of nicknameInputs.controls; let index = index">
+        <div formArrayName="inputs">
+          <div class="form-group" *ngFor="let control of inputList.controls; let index = index">
             <label [attr.for]="'nicknameInput' + index">Nickname {{index}}</label>
             <div class="input-group">
               <input [id]="'nicknameInput' + index"

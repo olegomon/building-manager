@@ -50,7 +50,7 @@ export class BuildingComponent implements OnInit {
 
   onAdd(nickname) {
     this.nicknameService.createNickname(nickname).subscribe((nicknames) => {
-      this.nicknames = nicknames;
+      this.nicknames = nicknames.slice();
       this.appToastService.show(new AppToast('Added', 'Nickname added'));
     });
   }
