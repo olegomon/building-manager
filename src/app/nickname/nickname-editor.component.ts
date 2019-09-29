@@ -9,28 +9,28 @@ import {faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 })
 export class NicknameEditorComponent implements OnInit, OnChanges {
 
-  private form: FormGroup;
-  private deleteIcon = faTrashAlt;
-  private addIcon = faPlus;
-  public isCollapsed = true;
+  form: FormGroup;
+  deleteIcon = faTrashAlt;
+  addIcon = faPlus;
+  isCollapsed = true;
 
   @Input('nicknames')
-  private values: string[] = [];
+  values: string[] = [];
 
   @Input()
-  private syncValidators: ValidatorFn | ValidatorFn[] | null = null;
+  syncValidators: ValidatorFn | ValidatorFn[] | null = null;
 
   @Input()
-  private asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
+  asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
 
   @Output()
-  private save = new EventEmitter<string[]>();
+  save = new EventEmitter<string[]>();
 
   @Output()
-  private delete = new EventEmitter<number>();
+  delete = new EventEmitter<number>();
 
   @Output()
-  private add = new EventEmitter<string>();
+  add = new EventEmitter<string>();
 
   constructor(private formBuilder: FormBuilder) {
   }

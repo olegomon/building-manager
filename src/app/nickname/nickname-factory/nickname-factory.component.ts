@@ -9,22 +9,22 @@ import {AbstractControl, AsyncValidatorFn, FormControl, ValidatorFn} from '@angu
 export class NicknameFactoryComponent implements OnInit {
 
   @Input()
-  private syncValidators: ValidatorFn | ValidatorFn[] | null = null;
+  syncValidators: ValidatorFn | ValidatorFn[] | null = null;
 
   @Input()
-  private asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
+  asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
 
   @Input()
-  private autofocus = false;
+  autofocus = false;
   @Input()
-  private placeholder = '';
+  placeholder = '';
   @Input()
-  private label = 'Nickname';
+  label = 'Nickname';
 
   @Output()
-  private add = new EventEmitter<string>();
+  add = new EventEmitter<string>();
 
-  private formControl = new FormControl('');
+  formControl = new FormControl('');
 
   constructor() {
   }
