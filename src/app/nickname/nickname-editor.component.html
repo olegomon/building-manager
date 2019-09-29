@@ -22,15 +22,18 @@
                    class="form-control"
                    [class.is-invalid]="showError(control)"
                    type="text"
-                   placeholder="Nickname">
+                   placeholder="Nickname"
+                   autocomplete="off">
+
             <div class="input-group-append">
-              <button (click)="deleteNickname(index)" class="btn btn-outline-secondary" type="button" tabindex="-1">
+              <button (click)="deleteNickname(index)" [disabled]="isPending(control)" class="btn btn-outline-secondary" type="button" tabindex="-1">
                 <fa-icon [icon]="deleteIcon"></fa-icon>
               </button>
             </div>
 
             <div class="invalid-feedback" *ngIf="showError(control)">
               <span *ngIf="control.errors?.required">Nickname is required</span>
+              <span *ngIf="control.errors?.format">{{control.errors.format.message}}</span>
             </div>
           </div>
         </div>
