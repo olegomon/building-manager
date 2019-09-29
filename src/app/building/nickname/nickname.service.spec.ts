@@ -10,4 +10,9 @@ describe('NicknameService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('fetchNicknames should return empty initially', () => {
+    const service: NicknameService = TestBed.get(NicknameService);
+    return service.fetchNicknames();
+  });
+
 });

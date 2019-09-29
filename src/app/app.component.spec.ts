@@ -31,4 +31,19 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('.navbar-brand span').textContent).toContain('Buildings');
   });
+
+  it('should render BuildingComponent', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-building')).toBeTruthy();
+  });
+
+  it('should render AppToastsComponent', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('app-toasts')).toBeTruthy();
+  });
+
 });

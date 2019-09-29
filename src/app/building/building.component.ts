@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
-import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import {AppToast} from '../app-toasts/app-toast';
 import {AppToastService} from '../app-toasts/app-toast.service';
 import {NicknameService} from './nickname/nickname.service';
@@ -13,13 +12,14 @@ import {nicknameFormatValidator} from './nickname/nickname.validator';
 })
 export class BuildingComponent implements OnInit {
 
-  addressIcon = faMapMarkerAlt;
-  address = '30 St Mary Axe, London';
-  description = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ...';
   nicknames = [];
 
   syncValidators: ValidatorFn[];
   asyncValidators: AsyncValidatorFn[];
+
+  buildingImage = 'https://dummyimage.com/600x400/007bff/fff';
+  buildingAddress = '30 St Mary Axe, London';
+  buildingDescription = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ...';
 
   constructor(private appToastService: AppToastService, private nicknameService: NicknameService) {
     this.syncValidators = [Validators.required];

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -6,15 +6,16 @@ import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
   templateUrl: './building-details.component.html',
   styleUrls: ['./building-details.component.scss']
 })
-export class BuildingDetailsComponent implements OnInit {
+export class BuildingDetailsComponent {
 
   addressIcon = faMapMarkerAlt;
-  address = '30 St Mary Axe, London';
-  description = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ...';
 
-  constructor() {
-  }
+  @Input()
+  address: string;
 
-  ngOnInit() {
-  }
+  @Input()
+  image: string;
+
+  @Input()
+  description: string;
 }
