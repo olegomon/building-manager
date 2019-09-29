@@ -9,13 +9,15 @@ import {AppComponent} from './app.component';
 import {BuildingComponent} from './building/building.component';
 import {NicknameEditorComponent} from './nickname/nickname-editor.component';
 import { NicknameFactoryComponent } from './nickname/nickname-factory/nickname-factory.component';
+import { BuildingDetailsComponent } from './building/building-details/building-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BuildingComponent,
     NicknameEditorComponent,
-    NicknameFactoryComponent
+    NicknameFactoryComponent,
+    BuildingDetailsComponent
   ],
   imports: [
     BrowserModule,

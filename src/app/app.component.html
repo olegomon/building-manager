@@ -5,32 +5,15 @@
   </a>
 </nav>
 
-<div class="container">
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item"><a href="#">Library</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Data</li>
-    </ol>
-  </nav>
-</div>
+<!--<div class="container">-->
+<!--  <nav aria-label="breadcrumb">-->
+<!--    <ol class="breadcrumb">-->
+<!--      <li class="breadcrumb-item"><a href="#">Home</a></li>-->
+<!--      <li class="breadcrumb-item"><a href="#">Library</a></li>-->
+<!--      <li class="breadcrumb-item active" aria-current="page">Data</li>-->
+<!--    </ol>-->
+<!--  </nav>-->
+<!--</div>-->
 
-<div class="container">
-  <div class="row">
-    <div class="col-4">
-      <app-building></app-building>
-    </div>
-    <div class="col">
-      <app-nickname-editor [nicknames]="nicknames"
-                           [syncValidators]="syncValidators"
-                           [asyncValidators]="asyncValidators"
-                           (save)="onSave($event)"
-                           (delete)="onDelete($event)"
-                           (add)="onAdd($event)">
-      </app-nickname-editor>
-    </div>
-  </div>
-</div>
-
-
+<app-building></app-building>
 <router-outlet></router-outlet>
