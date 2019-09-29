@@ -1,6 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AsyncValidatorFn, ValidatorFn, Validators} from '@angular/forms';
 import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import {AppToast} from '../app-toasts/app-toast';
+import {AppToastService} from '../app-toasts/app-toast.service';
 import {NicknameService} from '../nickname/nickname.service';
 import {nicknameFormatValidator} from '../nickname/nickname.validator';
 
@@ -9,42 +11,48 @@ import {nicknameFormatValidator} from '../nickname/nickname.validator';
   templateUrl: './building.component.html',
   styleUrls: ['./building.component.scss']
 })
-export class BuildingComponent {
+export class BuildingComponent implements OnInit {
 
   addressIcon = faMapMarkerAlt;
   address = '30 St Mary Axe, London';
   description = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ...';
   nicknames = [];
 
-  syncValidators: ValidatorFn[] = [Validators.required];
-  asyncValidators: AsyncValidatorFn[] = [nicknameFormatValidator(this.nicknameService)];
+  syncValidators: ValidatorFn[];
+  asyncValidators: AsyncValidatorFn[];
 
-  constructor(private nicknameService: NicknameService) {
+  constructor(private appToastService: AppToastService, private nicknameService: NicknameService) {
+    this.syncValidators = [Validators.required];
+    this.asyncValidators = [nicknameFormatValidator(this.nicknameService)];
+  }
+
+  ngOnInit(): void {
+    this.fetchNicknames();
+  }
+
+  private fetchNicknames() {
+    this.nicknameService.fetchNicknames().subscribe((nicknames) => this.nicknames = nicknames);
   }
 
   onDelete(index: number) {
-    // TODO user index
-    console.log('delete', index);
-    console.log('delete before', this.nicknames);
-
-    this.nicknames = [
-      ...this.nicknames.slice(0, index),
-      ...this.nicknames.slice(index + 1)
-    ];
-
-    console.log('delete after', this.nicknames);
+    this.nicknameService.deleteNicknameByIndex(index).subscribe((newNicknames) => {
+      this.nicknames = newNicknames;
+      this.appToastService.show(new AppToast('Deleted', 'Nickname deleted'));
+    });
   }
 
   onSave(nicknames: string[]) {
-    // this.nicknames = nicknames;
-    // console.log('save nicknames', nicknames);
-    this.nicknameService.saveNicknames(nicknames);
+    this.nicknameService.saveNicknames(nicknames).subscribe((newNicknames) => {
+      this.nicknames = newNicknames;
+      this.appToastService.show(new AppToast('Saved', 'Nicknames saved'));
+    });
   }
 
   onAdd(nickname) {
-    console.log('add before', this.nicknames);
-    this.nicknames = [...this.nicknames, nickname];
-    console.log('add after', this.nicknames);
+    this.nicknameService.createNickname(nickname).subscribe((nicknames) => {
+      this.nicknames = nicknames;
+      this.appToastService.show(new AppToast('Added', 'Nickname added'));
+    });
   }
 
 }

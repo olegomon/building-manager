@@ -10,6 +10,7 @@ import {BuildingComponent} from './building/building.component';
 import {NicknameEditorComponent} from './nickname/nickname-editor.component';
 import { NicknameFactoryComponent } from './nickname/nickname-factory/nickname-factory.component';
 import { BuildingDetailsComponent } from './building/building-details/building-details.component';
+import { AppToastsComponent } from './app-toasts/app-toasts.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BuildingDetailsComponent } from './building/building-details/building-d
     BuildingComponent,
     NicknameEditorComponent,
     NicknameFactoryComponent,
-    BuildingDetailsComponent
+    BuildingDetailsComponent,
+    AppToastsComponent
   ],
   imports: [
     BrowserModule,

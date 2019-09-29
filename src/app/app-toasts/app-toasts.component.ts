@@ -7,7 +7,6 @@ import {AppToastService} from './app-toast.service';
   styleUrls: ['./app-toasts.component.scss']
 })
 export class AppToastsComponent {
-  delay: 2000;
-  constructor(private toastsService: AppToastService) {
+  constructor(public toastsService: AppToastService) {
   }
 }

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidatorFn} from '@angular/forms';
-import {faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faTimes, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nickname-editor',
@@ -12,10 +12,11 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   form: FormGroup;
   deleteIcon = faTrashAlt;
   addIcon = faPlus;
+  cancelIcon = faTimes;
   isCollapsed = true;
 
-  @Input('nicknames')
-  values: string[] = [];
+  @Input()
+  nicknames: string[] = [];
 
   @Input()
   syncValidators: ValidatorFn | ValidatorFn[] | null = null;
@@ -35,27 +36,22 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   constructor(private formBuilder: FormBuilder) {
   }
 
-  get nicknames() {
+  get nicknameInputs() {
     return this.form.get('nicknames') as FormArray;
   }
 
   ngOnInit() {
-    if (this.nicknames.length === 0) {
-      this.isCollapsed = false;
-    } else {
-      this.form = this.createForm(this.values);
-    }
+    // if (this.nicknames.length === 0) {
+    //   this.isCollapsed = false;
+    // } else {
+      this.form = this.createForm(this.nicknames);
+    // }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes', changes);
     if (changes.values) {
       const values = changes.values.currentValue;
       this.form = this.createForm(values);
-    }
-
-    if (this.nicknames.length === 0) {
-      this.isCollapsed = false;
     }
   }
 
@@ -70,7 +66,7 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   }
 
   onSave() {
-    const nicknames = this.nicknames.value;
+    const nicknames = this.nicknameInputs.value;
     this.save.emit(nicknames);
     // if (this.form.valid) {
     //   const nicknames = this.form.value;
@@ -86,7 +82,6 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   }
 
   onDelete(index: number) {
-    this.onSave();
     this.delete.emit(index);
   }
 
@@ -99,7 +94,7 @@ export class NicknameEditorComponent implements OnInit, OnChanges {
   }
 
   isEmpty() {
-    return this.values && this.values.length === 0;
+    return this.nicknames && this.nicknames.length === 0;
   }
 
   onToggle() {
