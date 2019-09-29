@@ -1,53 +1,100 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
-import {NicknameService} from './nickname.service';
-import {nicknameFormatValidator} from './nickname.validator';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {AbstractControl, AsyncValidatorFn, FormArray, FormBuilder, FormGroup, ValidatorFn} from '@angular/forms';
+import {faPlus, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nickname-editor',
   templateUrl: './nickname-editor.component.html',
   styleUrls: ['./nickname-editor.component.scss']
 })
-export class NicknameEditorComponent implements OnInit {
+export class NicknameEditorComponent implements OnInit, OnChanges {
 
-  editorForm: FormGroup;
-  deleteIcon = faTrashAlt;
+  private form: FormGroup;
+  private deleteIcon = faTrashAlt;
+  private addIcon = faPlus;
+  public isCollapsed = true;
 
-  private syncValidators: ValidatorFn[] = [Validators.required];
-  private asyncValidators: AsyncValidatorFn[] = [nicknameFormatValidator(this.nicknameService)];
+  @Input('nicknames')
+  private values: string[] = [];
 
-  constructor(private formBuilder: FormBuilder, private nicknameService: NicknameService) {
+  @Input()
+  private syncValidators: ValidatorFn | ValidatorFn[] | null = null;
+
+  @Input()
+  private asyncValidators: AsyncValidatorFn | AsyncValidatorFn[] | null = null;
+
+  @Output()
+  private save = new EventEmitter<string[]>();
+
+  @Output()
+  private delete = new EventEmitter<number>();
+
+  @Output()
+  private add = new EventEmitter<string>();
+
+  constructor(private formBuilder: FormBuilder) {
   }
 
   get nicknames() {
-    return this.editorForm.get('nicknames') as FormArray;
+    return this.form.get('nicknames') as FormArray;
   }
 
   ngOnInit() {
-    this.editorForm = this.formBuilder.group({
-      nicknames: this.formBuilder.array([
-        this.formBuilder.control('', {
-          validators: this.syncValidators,
-          asyncValidators: this.asyncValidators
-        })
-      ])
-    });
+    if (this.nicknames.length === 0) {
+      this.isCollapsed = false;
+    } else {
+      this.form = this.createForm(this.values);
+    }
   }
 
-  addNickname() {
-    this.nicknames.push(this.formBuilder.control('', {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes', changes);
+    if (changes.values) {
+      const values = changes.values.currentValue;
+      this.form = this.createForm(values);
+    }
+
+    if (this.nicknames.length === 0) {
+      this.isCollapsed = false;
+    }
+  }
+
+  createForm(values: string[]) {
+    const nicknames = values.map((nickname) => this.formBuilder.control(nickname, {
       validators: this.syncValidators,
       asyncValidators: this.asyncValidators
     }));
+    return this.formBuilder.group({
+      nicknames: this.formBuilder.array(nicknames)
+    });
   }
 
-  onSubmit() {
-    console.log(this.editorForm.value);
+  // addNickname() {
+  //   this.nicknameInputList.push(this.formBuilder.control('', {
+  //     validators: this.syncValidators,
+  //     asyncValidators: this.asyncValidators
+  //   }));
+  // }
+
+  onSave() {
+    const nicknames = this.nicknames.value;
+    this.save.emit(nicknames);
+    // if (this.form.valid) {
+    //   const nicknames = this.form.value;
+    //   this.save.emit(nicknames);
+    // } else {
+    //   this.nicknames.markAllAsTouched();
+    // }
   }
 
-  deleteNickname(index: number) {
-    this.nicknames.removeAt(index);
+  onAdd(nickname: string) {
+    this.onToggle();
+    this.add.emit(nickname);
+  }
+
+  onDelete(index: number) {
+    this.onSave();
+    this.delete.emit(index);
   }
 
   showError(control: AbstractControl) {
@@ -55,6 +102,14 @@ export class NicknameEditorComponent implements OnInit {
   }
 
   isPending(control: AbstractControl) {
-    return control.status === 'PENDING';
+    return control.pending;
+  }
+
+  isEmpty() {
+    return this.values && this.values.length === 0;
+  }
+
+  onToggle() {
+    this.isCollapsed = !this.isCollapsed;
   }
 }

@@ -21,7 +21,13 @@
       <app-building></app-building>
     </div>
     <div class="col">
-      <app-nickname-editor></app-nickname-editor>
+      <app-nickname-editor [nicknames]="nicknames"
+                           [syncValidators]="syncValidators"
+                           [asyncValidators]="asyncValidators"
+                           (save)="onSave($event)"
+                           (delete)="onDelete($event)"
+                           (add)="onAdd($event)">
+      </app-nickname-editor>
     </div>
   </div>
 </div>

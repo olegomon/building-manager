@@ -7,13 +7,15 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BuildingComponent} from './building/building.component';
-import {NicknameEditorComponent} from './nickname-editor/nickname-editor.component';
+import {NicknameEditorComponent} from './nickname/nickname-editor.component';
+import { NicknameFactoryComponent } from './nickname/nickname-factory/nickname-factory.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BuildingComponent,
-    NicknameEditorComponent
+    NicknameEditorComponent,
+    NicknameFactoryComponent
   ],
   imports: [
     BrowserModule,
