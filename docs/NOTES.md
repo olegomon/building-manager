@@ -29,3 +29,7 @@ well as for the `BuildingDetailComponent`
 
 With little adjustments, this the component can be easily used to edit nicknames for the building rooms in future development.
 
+# Network simulation
+
+To demonstrate the state of the UI elements and async validation, a network connection is simulated by delaying all method invocations 
+on the `DelayedNicknameService`. This can be turned off by injecting the `NicknameService` instead. See `nickname.service.provider.ts` 
