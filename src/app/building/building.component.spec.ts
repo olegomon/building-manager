@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BuildingComponent} from './building.component';
 import {BuildingModule} from './building.module';
+import {NicknameService} from './nickname/nickname.service';
 
 describe('BuildingComponent', () => {
   let component: BuildingComponent;
@@ -11,6 +12,9 @@ describe('BuildingComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         BuildingModule
+      ],
+      providers: [
+        {provide: NicknameService, useClass: NicknameService}
       ]
     })
       .compileComponents();

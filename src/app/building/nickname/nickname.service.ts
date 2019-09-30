@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {delay, tap} from 'rxjs/operators';
+import {delay} from 'rxjs/operators';
 import {Logger} from '../../logger.service';
 import {INicknameService} from './nickname.service.interface';
 
@@ -22,9 +22,6 @@ export class NicknameService implements INicknameService {
    */
   private nicknames = [];
 
-  constructor(private logger: Logger) {
-  }
-
   fetchNicknames(): Observable<string[]> {
     return of(this.nicknames);
   }
@@ -40,7 +37,9 @@ export class NicknameService implements INicknameService {
   }
 
   deleteNicknameByIndex(index: number): Observable<string[]> {
-    this.nicknames = [...this.nicknames.slice(0, index), ...this.nicknames.slice(index + 1)];
+    if (index >= 0 && index <= this.nicknames.length - 1) {
+      this.nicknames = [...this.nicknames.slice(0, index), ...this.nicknames.slice(index + 1)];
+    }
     return this.fetchNicknames();
   }
 
