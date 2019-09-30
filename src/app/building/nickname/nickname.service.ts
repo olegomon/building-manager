@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {delay} from 'rxjs/operators';
-import {Logger} from '../../logger.service';
 import {INicknameService} from './nickname.service.interface';
 
 /**
@@ -57,10 +56,9 @@ export class NicknameService implements INicknameService {
 @Injectable({
   providedIn: 'root'
 })
-export class DelayedNicknameService implements INicknameService {
+export class DelayedNicknameService extends NicknameService {
 
-  constructor(private nicknameService: INicknameService, private logger: Logger, private maxDelay: number = 250) {
-  }
+  private maxDelay = 250;
 
   private getRandomDelay() {
     return Math.floor(Math.random() * Math.floor(this.maxDelay));
@@ -71,22 +69,22 @@ export class DelayedNicknameService implements INicknameService {
   }
 
   createNickname(nickname: string): Observable<string[]> {
-    return this.delay(this.nicknameService.createNickname(nickname));
+    return this.delay(super.createNickname(nickname));
   }
 
   deleteNicknameByIndex(index: number): Observable<string[]> {
-    return this.delay(this.nicknameService.deleteNicknameByIndex(index));
+    return this.delay(super.deleteNicknameByIndex(index));
   }
 
   fetchNicknames(): Observable<string[]> {
-    return this.delay(this.nicknameService.fetchNicknames());
+    return this.delay(super.fetchNicknames());
   }
 
   isValidNickname(name: string): Observable<boolean> {
-    return this.delay(this.nicknameService.isValidNickname(name));
+    return this.delay(super.isValidNickname(name));
   }
 
   saveNicknames(nicknames: string[]) {
-    return this.delay(this.nicknameService.saveNicknames(nicknames));
+    return this.delay(super.saveNicknames(nicknames));
   }
 }

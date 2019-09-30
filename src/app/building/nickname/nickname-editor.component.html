@@ -29,7 +29,7 @@
       <form [formGroup]="form" (submit)="onSave()">
         <div formArrayName="inputs">
           <div class="form-group" *ngFor="let control of inputList.controls; let index = index">
-            <label [attr.for]="'nicknameInput' + index">Nickname {{index}}</label>
+            <label [attr.for]="'nicknameInput' + index">Nickname</label>
             <div class="input-group">
               <input [id]="'nicknameInput' + index"
                      [readOnly]="!isCollapsed"
