@@ -14,3 +14,15 @@ export class Logger {
     console.warn(message, ...optionalParams);
   }
 }
+
+@Injectable({providedIn: 'root'})
+export class SilentLogger {
+  log(message: any, ...optionalParams: any[]) {
+  }
+
+  error(message: any, ...optionalParams: any[]) {
+  }
+
+  warn(message: any, ...optionalParams: any[]) {
+  }
+}

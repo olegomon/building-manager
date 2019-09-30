@@ -8,6 +8,7 @@ import {BuildingComponent} from './building.component';
 import {BuildingDetailsComponent} from './details/building-details.component';
 import {NicknameEditorComponent} from './nickname/nickname-editor.component';
 import {NicknameFactoryComponent} from './nickname/nickname-factory/nickname-factory.component';
+import {nicknameServiceProvider} from './nickname/nickname.service.provider';
 
 
 @NgModule({
@@ -29,6 +30,9 @@ import {NicknameFactoryComponent} from './nickname/nickname-factory/nickname-fac
     ReactiveFormsModule,
     NgbModule,
     AppToastsModule
+  ],
+  providers: [
+    nicknameServiceProvider
   ]
 })
 export class BuildingModule {
