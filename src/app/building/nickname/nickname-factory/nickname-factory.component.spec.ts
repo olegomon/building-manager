@@ -31,8 +31,5 @@ describe('NicknameFactoryComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should set validators on form control', () => {
-  //
-  //   // expect(component.formControl.validator).to
-  // });
 });
+

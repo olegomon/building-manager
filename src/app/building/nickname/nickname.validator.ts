@@ -4,7 +4,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {NicknameService} from './nickname.service';
 
 export const nicknameFormatValidator = (nicknameService: NicknameService, debounce: number = 250): AsyncValidatorFn => {
-  return (control: AbstractControl): Promise<ValidationErrors | null> | Observable<ValidationErrors | null> => {
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
 
     // do not hit the validation service on each keystroke
     return timer(debounce).pipe(

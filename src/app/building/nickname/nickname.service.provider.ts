@@ -3,7 +3,7 @@ import {DelayedNicknameService, NicknameService} from './nickname.service';
 
 export const delayedNicknameServiceFactory = (logger: Logger) => {
   console.log('delayed service');
-  return new DelayedNicknameService(new NicknameService(logger), logger, 250);
+  return new DelayedNicknameService(new NicknameService(), logger, 250);
 };
 
 export const nicknameServiceProvider = {
